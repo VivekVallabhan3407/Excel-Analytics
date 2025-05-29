@@ -1,6 +1,6 @@
 # Excel-Analytics
 
-## A web-based tool to upload Excel files and perform basic analytics like statistical summaries and visualizations. Built with the MERN stack.
+### A web-based tool to upload Excel files and perform basic analytics like statistical summaries and visualizations. Built with the MERN stack. 
 
 ## Features
 - Upload .xlsx or .csv files
@@ -21,18 +21,18 @@
 - Database: MongoDB Atlas
 - Others: Mongoose, JWT, CORS, dotenv
 
-🧪 Sample Functionalities
+## 🧪 Sample Functionalities
 - User logs in or registers
 
 - Uploads an Excel file
 
 - Gets insights like:
 
--- Number of rows/columns
+    - Number of rows/columns
 
--- Column-wise statistics
+    - Column-wise statistics
 
--- Graphical representation
+    - Graphical representation
 
 ## 📄 License
 MIT
