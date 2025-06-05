@@ -14,4 +14,4 @@ const excelRecordSchema = new mongoose.Schema({
         default: Date.now,
     }
 });
-module.esports=mongoose.model('ExcelRecord',excelRecordSchema);
+module.exports=mongoose.model('ExcelRecord',excelRecordSchema);

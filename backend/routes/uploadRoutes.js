@@ -6,10 +6,15 @@ const auth=require("../middleware/auth");
 const ExcelRecord=require('../models/ExcelRecord')
 const router=express.Router();
 
-const storage=multer.diskStorage({
-  destination: (req, file, cb) => {null,'uploads/'},
-  filename: (req, file, cb) => cb(null, Date.now()+path.extname(file.originalname))
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
 });
+
 
 const uplaod=multer({storage});
 
@@ -44,7 +49,7 @@ router.post("/upload",auth,uplaod.single("file"),async (req, res) => {
   }
 });
 
-router.get("/records", auth, async (req, res) => {
+router.get("/records/:id", auth, async (req, res) => {
     try{
         const record=await ExcelRecord.findById(req.params.id);
         if(!record){
