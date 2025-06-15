@@ -5,4 +5,3 @@ const instance = axios.create({
   withCredentials: true, // only if you use cookies
 });
 
-export default instance;
