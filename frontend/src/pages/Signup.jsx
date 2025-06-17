@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import axios from '../services/axios';
 
 function Signup() {
   const [formData, setFormData] = useState({
     name: '', email: '', password: '', role: 'user', phone: '', dob: ''
   });
+    const navigate = useNavigate(); 
 
 
   const handleChange = (e) => {
@@ -23,6 +25,7 @@ function Signup() {
     try {
       await axios.post('/register', formData); // NOT /api/register
       alert('Registered successfully');
+      navigate('/login');
     } catch (err) {
       alert('Signup failed');
     }

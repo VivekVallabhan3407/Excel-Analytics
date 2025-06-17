@@ -26,18 +26,22 @@ if (!phoneRegex.test(phone)) {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  console.log('Login attempt:', email, password);
+  console.log(`Login attempt from: ${email}`); // Minimal, non-sensitive
 
   try {
     const user = await User.findOne({ email });
-    console.log('User found:', user);
 
-    if (!user) return res.status(400).json({ error: 'User not found' });
+    if (!user) {
+      console.log(`Login failed: No user found for ${email}`);
+      return res.status(400).json({ error: 'User not found' });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log('Password match:', isMatch);
 
-    if (!isMatch) return res.status(400).json({ error: 'Invalid password' });
+    if (!isMatch) {
+      console.log(`Login failed: Incorrect password for ${email}`);
+      return res.status(400).json({ error: 'Invalid password' });
+    }
 
     const token = jwt.sign(
       { _id: user._id, name: user.name, role: user.role },
@@ -45,9 +49,17 @@ exports.login = async (req, res) => {
       { expiresIn: '1d' }
     );
 
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      user: {
+        name: user.name,
+        role: user.role,
+      }
+    });
+
   } catch (err) {
-    console.error('Login error:', err);
+    console.error('Login error:', err.message); // Only error message
     res.status(500).json({ error: 'Server error during login' });
   }
 };

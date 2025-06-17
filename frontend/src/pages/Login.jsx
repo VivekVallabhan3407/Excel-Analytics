@@ -12,9 +12,17 @@ function Login() {
     e.preventDefault();
     try {
       const res = await axios.post('/login', { email, password });
+
+      const token = res.data.token;
+      // Decode token (without verifying, just extracting payload)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+
       alert('Login successful');
-      localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
+
 
     } catch {
       alert('Login failed');
