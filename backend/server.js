@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.use('/api',require('./routes/authRoutes'));
 app.use('/api',require('./routes/uploadRoutes'));
-app.use('/api',require('./routes/userRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
 
 mongoose
   .connect(process.env.MONGO_URI, {

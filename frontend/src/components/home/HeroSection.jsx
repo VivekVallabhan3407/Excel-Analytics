@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../ui/Container';
 import { Link } from 'react-router-dom';
-
+import excelGraph from '../../assets/excel-graph.png'; 
 export default function HeroSection() {
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -24,7 +24,7 @@ export default function HeroSection() {
           </div>
           <div className="relative">
             <img 
-              src="/excel-analytics-preview.png" 
+                src={excelGraph} 
               alt="Excel Analytics Dashboard" 
               className="rounded-lg shadow-2xl"
             />

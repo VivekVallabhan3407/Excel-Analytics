@@ -14,11 +14,13 @@ import About from './pages/About';
 
 import Dashboard from './pages/DashBoard';
 import UploadFile from './pages/UploadFile';
-// import AnalyzeData from './pages/AnalyzeData';
-// import ChartHistory from './pages/ChartHistory';
-// import Profile from './pages/Profile';
+import AnalyzeData from './pages/AnalyzeData';
+import ChartHistory from './pages/ChartHistory';
+import Profile from './pages/Profile';
 // import AdminPanel from './pages/AdminPanel';
 // import AIInsights from './pages/AIInsights'; // keep empty for now
+import { AuthProvider } from './contexts/authContext';
+
 
 import { ThemeProvider } from './contexts/ThemeContext';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -29,91 +31,92 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <Router>
-          <Routes>
-            {/* Public routes */}
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar />
-                  <Home />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <>
-                  <Navbar />
-                  <Signup />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <>
-                  <Navbar />
-                  <Login />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/forgot-password"
-              element={
-                <>
-                  <Navbar />
-                  <ForgotPassword />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/reset-password/:token"
-              element={
-                <>
-                  <Navbar />
-                  <ResetPassword />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <>
-                  <Navbar />
-                  <About />
-                  <Footer />
-                </>
-              }
-            />
-            {/* Protected Routes (inside DashBoardLayout) */}
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <DashBoardLayout>
-                    <Dashboard />
-                  </DashBoardLayout>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/upload"
-              element={
-                <ProtectedRoute>
-                  <DashBoardLayout>
-                    <UploadFile />
-                  </DashBoardLayout>
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
+        <AuthProvider>
+          <Router>
+            <Routes>
+              {/* Public routes */}
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Navbar />
+                    <Home />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <>
+                    <Navbar />
+                    <Signup />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <>
+                    <Navbar />
+                    <Login />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/forgot-password"
+                element={
+                  <>
+                    <Navbar />
+                    <ForgotPassword />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/reset-password/:token"
+                element={
+                  <>
+                    <Navbar />
+                    <ResetPassword />
+                    <Footer />
+                  </>
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <>
+                    <Navbar />
+                    <About />
+                    <Footer />
+                  </>
+                }
+              />
+              {/* Protected Routes (inside DashBoardLayout) */}
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <Dashboard />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/upload"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <UploadFile />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
           path="/analyze"
           element={
             <ProtectedRoute>
@@ -133,7 +136,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/aiinsights"
           element={
             <ProtectedRoute>
@@ -143,17 +146,17 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
-            <Route
-              path="/settings"
-              element={
-                <ProtectedRoute>
-                  <DashBoardLayout>
-                    <Settings />
-                  </DashBoardLayout>
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
+              <Route
+                path="/settings"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <Settings />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              {/* <Route
           path="/admin"
           element={
             <ProtectedRoute>
@@ -163,8 +166,8 @@ function App() {
             </ProtectedRoute>
           } 
         /> */}
-            {/* Uncomment below once AIInsights page is ready */}
-            {/* <Route
+              {/* Uncomment below once AIInsights page is ready */}
+              {/* <Route
           path="/insights"
           element={
             <ProtectedRoute>
@@ -174,19 +177,30 @@ function App() {
             </ProtectedRoute>
           }
         /> */}
-            <Route
-              path="/terms"
-              element={
-                <ProtectedRoute>
-                  <DashBoardLayout>
-                    <Terms />
-                  </DashBoardLayout>
-                </ProtectedRoute>
-              }
-            />
+              <Route
+                path="/terms"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <Terms />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <Profile />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
 
-          </Routes>
-        </Router>
+            </Routes>
+          </Router>
+        </AuthProvider>
       </LanguageProvider>
     </ThemeProvider>
 
