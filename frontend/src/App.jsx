@@ -17,7 +17,7 @@ import UploadFile from './pages/UploadFile';
 import AnalyzeData from './pages/AnalyzeData';
 import ChartHistory from './pages/ChartHistory';
 import Profile from './pages/Profile';
-// import AdminPanel from './pages/AdminPanel';
+ import AdminPanel from './pages/AdminPanel';
 // import AIInsights from './pages/AIInsights'; // keep empty for now
 import { AuthProvider } from './contexts/authContext';
 
@@ -113,7 +113,7 @@ function App() {
                     <DashBoardLayout>
                       <UploadFile />
                     </DashBoardLayout>
-                  </ProtectedRoute>
+                  </ProtectedRoute adminOnly={tru}>
                 }
               />
               <Route
@@ -156,7 +156,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              {/* <Route
+              <Route
           path="/admin"
           element={
             <ProtectedRoute>
@@ -165,7 +165,7 @@ function App() {
               </DashBoardLayout>
             </ProtectedRoute>
           } 
-        /> */}
+        /> 
               {/* Uncomment below once AIInsights page is ready */}
               {/* <Route
           path="/insights"

@@ -43,20 +43,33 @@ export default function Sidebar() {
             </div>
 
             {/* Sidebar Nav */}
-            <nav className="flex-1 text-base font-semibold">
-                {links.map(({ to, label, icon: Icon }) => (
-                    <NavLink
-                        key={to}
-                        to={to}
-                        className={({ isActive }) =>
-                            `flex items-center px-4 py-3 hover:bg-green-600 space-x-3 ${isActive ? 'bg-green-800' : ''}`
-                        }
-                    >
-                        <Icon className="text-white text-lg" /> {/* larger icon */}
-                        <span>{label}</span>
-                    </NavLink>
-                ))}
-            </nav>
+<nav className="flex-1 text-base font-semibold">
+  {links.map(({ to, label, icon: Icon }) => (
+    <NavLink
+      key={to}
+      to={to}
+      className={({ isActive }) =>
+        `flex items-center px-4 py-3 hover:bg-green-600 space-x-3 ${isActive ? 'bg-green-800' : ''}`
+      }
+    >
+      <Icon className="text-white text-lg" />
+      <span>{label}</span>
+    </NavLink>
+  ))}
+
+  {/* Show Admin Panel only if role is admin */}
+  {role === 'admin' && (
+    <NavLink
+      to="/admin"
+      className={({ isActive }) =>
+        `flex items-center px-4 py-3 hover:bg-green-600 space-x-3 ${isActive ? 'bg-green-800' : ''}`
+      }
+    >
+      <FaTools className="text-white text-lg" />
+      <span>Admin Panel</span>
+    </NavLink>
+  )}
+</nav>
 
             {/* Logout */}
             <button
