@@ -18,7 +18,7 @@ import AnalyzeData from './pages/AnalyzeData';
 import ChartHistory from './pages/ChartHistory';
 import Profile from './pages/Profile';
  import AdminPanel from './pages/AdminPanel';
-// import AIInsights from './pages/AIInsights'; // keep empty for now
+import AIInsights from './pages/AIInsights'; // keep empty for now
 import { AuthProvider } from './contexts/authContext';
 
 
@@ -109,11 +109,11 @@ function App() {
               <Route
                 path="/upload"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute >
                     <DashBoardLayout>
                       <UploadFile />
                     </DashBoardLayout>
-                  </ProtectedRoute adminOnly={tru}>
+                  </ProtectedRoute >
                 }
               />
               <Route
@@ -136,16 +136,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* <Route
-          path="/aiinsights"
-          element={
-            <ProtectedRoute>
-              <DashBoardLayout>
-                <AIInsights />
-              </DashBoardLayout>
-            </ProtectedRoute>
-          }
-        /> */}
               <Route
                 path="/settings"
                 element={
@@ -159,15 +149,15 @@ function App() {
               <Route
           path="/admin"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute adminOnly={true}>
               <DashBoardLayout>
                 <AdminPanel />
               </DashBoardLayout>
             </ProtectedRoute>
           } 
         /> 
-              {/* Uncomment below once AIInsights page is ready */}
-              {/* <Route
+         
+              <Route
           path="/insights"
           element={
             <ProtectedRoute>
@@ -176,7 +166,7 @@ function App() {
               </DashBoardLayout>
             </ProtectedRoute>
           }
-        /> */}
+        />
               <Route
                 path="/terms"
                 element={

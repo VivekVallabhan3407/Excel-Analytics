@@ -14,7 +14,7 @@ router.post('/login', login);
 router.post('/verify-pin', (req, res) => {
   const { pin } = req.body;
   if (pin === process.env.ADMIN_PIN) {
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ valid: true });
   } else {
     return res.status(401).json({ message: 'Invalid PIN' });
   }

@@ -22,7 +22,7 @@ app.use('/api',require('./routes/uploadRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 const aiRoutes = require('./routes/aiRoutes');
 app.use('/api/ai', aiRoutes);
-
+app.use('/api/admin', require('./routes/adminRoutes'));
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
