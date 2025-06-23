@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from '../services/axios';
 import * as XLSX from 'xlsx';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
-
+import { useNavigate } from 'react-router-dom';
 function UploadFile() {
   const [file, setFile] = useState(null);
   const [previewData, setPreviewData] = useState([]);
@@ -57,6 +57,7 @@ function UploadFile() {
       alert('Upload failed');
       console.error(err);
     }
+    navigate('/analyze',{state:{filName: file.name}}); 
   };
 
   return (
