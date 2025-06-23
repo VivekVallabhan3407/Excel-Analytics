@@ -5,11 +5,7 @@ const xlsx = require("xlsx");
 const ExcelRecord = require("../models/ExcelRecord");
 
 exports.uploadFile = async (req, res) => {
-  console.log('⚙️ Upload endpoint hit – headers:', req.headers.authorization);
-  console.log('⚙️ Multer file:', req.file);
-
-  console.log('req.headers:', req.headers);
-  console.log('req.file:', req.file);
+ 
   if (!req.file) {
     console.log('No file received');
     return res.status(400).json({ message: 'No file uploaded' });

@@ -42,7 +42,6 @@ function UploadFile() {
 
       const formData = new FormData();
       formData.append('file', file);
-      console.log("Sending file:", file); 
 
     try {
       await axios.post('/upload', formData, {
