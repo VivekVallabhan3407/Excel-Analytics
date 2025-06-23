@@ -19,7 +19,7 @@ function Login() {
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
-
+      
       alert('Login successful');
       navigate('/dashboard');
 
