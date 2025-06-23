@@ -16,7 +16,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
-
+router.get('/files', auth, uploadController.getAllUploadedFiles);
+router.get('/columns/:fileName', auth, uploadController.getColumnsByFileName);
 router.post("/upload", auth, upload.single("file"), uploadController.uploadFile);
 router.get("/records/:id", auth, uploadController.getRecordById);
 

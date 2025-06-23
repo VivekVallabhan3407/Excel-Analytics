@@ -7,7 +7,7 @@ function UploadFile() {
   const [file, setFile] = useState(null);
   const [previewData, setPreviewData] = useState([]);
   const [showModal, setShowModal] = useState(false);
-
+  const navigate = useNavigate();
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (!selected) return;
@@ -36,7 +36,6 @@ function UploadFile() {
 
   const confirmUpload = async () => {
      const token = localStorage.getItem('token'); 
-      console.log("Token used:", token); 
 
       if (!file) return alert("Select a file first.");
 

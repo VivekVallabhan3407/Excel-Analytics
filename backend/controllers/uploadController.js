@@ -55,3 +55,38 @@ exports.getRecordById = async (req, res) => {
     res.status(500).json({ message: "Server error while retrieving record" });
   }
 };
+
+
+exports.getAllUploadedFiles = async (req, res) => {
+  try {
+    const files = await ExcelRecord.find({ userId: req.user._id }).select('fileName');
+    const fileNames = files.map(f => f.fileName);
+    res.json(fileNames);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error fetching uploaded files' });
+  }
+};
+
+exports.getColumnsByFileName = async (req, res) => {
+  const { fileName } = req.params;
+
+  try {
+    const record = await ExcelRecord.findOne({ 
+      userId: req.user._id,
+      fileName
+    });
+
+    if (!record || !record.content || record.content.length === 0) {
+      return res.status(404).json({ message: 'File content not found' });
+    }
+
+    const firstRow = record.content[0];
+    const columns = Object.keys(firstRow);
+    
+    res.status(200).json(columns);
+  } catch (err) {
+    console.error('Error fetching columns:', err);
+    res.status(500).json({ message: 'Failed to retrieve columns' });
+  }
+};
