@@ -119,9 +119,9 @@ function AdminPanel() {
           <tbody>
             {users.map((user) => (
               <tr key={user._id} className="border-t">
-                <td className="px-4 py-2">{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
+                <td className="px-4 py-2">{user.name ?? ''}</td>
+                <td>{user.email ?? ''}</td>
+                <td>{user.role ?? ''}</td>
                 <td>{user.files || 0}</td>
                 <td>{user.charts || 0}</td>
                 <td>{user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'N/A'}</td>

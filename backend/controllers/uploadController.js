@@ -3,16 +3,15 @@ const path = require("path");
 const fs = require("fs");
 const xlsx = require("xlsx");
 const ExcelRecord = require("../models/ExcelRecord");
+const User = require("../models/User"); // Ensure this path is correct
 
 exports.uploadFile = async (req, res) => {
- 
   if (!req.file) {
     console.log('No file received');
     return res.status(400).json({ message: 'No file uploaded' });
   }
-  try {
-  
 
+  try {
     const filePath = path.join(__dirname, "../uploads", req.file.filename);
     const workbook = xlsx.readFile(filePath);
     const sheetName = workbook.SheetNames[0];
@@ -23,21 +22,30 @@ exports.uploadFile = async (req, res) => {
       userId: req.user._id,
       fileName: req.file.originalname,
       content: jsonData,
-      size: req.file.size, // Store the size of the file
+      size: req.file.size, // optional: not used elsewhere
     });
 
     await newRecord.save();
     fs.unlinkSync(filePath); // remove file from disk after processing
+
+    // ✅ UPDATE user document with file count and size
+    await User.findByIdAndUpdate(req.user._id, {
+      $inc: {
+        files: 1,
+        totalSize: req.file.size  // In bytes; convert in frontend
+      }
+    });
 
     res.status(201).json({
       message: "File uploaded successfully",
       record_id: newRecord._id,
       rowCount: jsonData.length,
     });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server error while uploading file" });
-  }
+    res.status(500).json({ message: "Server error while uploading file" });
+  }
 };
 
 exports.getRecordById = async (req, res) => {

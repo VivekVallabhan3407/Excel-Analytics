@@ -1,5 +1,6 @@
 const User = require('../models/User'); // Make sure path is correct
-
+const ExcelRecord = require('../models/ExcelRecord'); // Make sure path is correct
+const SavedChart = require('../models/SavedCharts'); // Make sure path is correct
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
