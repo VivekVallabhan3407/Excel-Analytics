@@ -29,8 +29,10 @@ function AdminPanel() {
       const activeUsers = userList.filter(u => u.active !== false).length;
       const totalFiles = userList.reduce((sum, u) => sum + (u.files || 0), 0);
       const totalCharts = userList.reduce((sum, u) => sum + (u.charts || 0), 0);
-      const totalFileSize = userList.reduce((sum, u) => sum + (u.totalSize || 0), 0);
-
+      const totalFileSize = userList.reduce((sum, u) => {
+        const size = typeof u.totalSize === 'number' ? u.totalSize : 0;
+        return sum + size;
+      }, 0);
       setStats({
         totalUsers,
         activeUsers,
@@ -99,7 +101,7 @@ function AdminPanel() {
         <StatCard label="Active Users" value={stats.activeUsers} />
         <StatCard label="Files Uploaded" value={stats.totalFiles} />
         <StatCard label="Charts Created" value={stats.totalCharts} />
-        <StatCard label="Total File Size" value={`${stats.totalFileSize} MB`} />
+        <StatCard label="Total File Size" value={`${stats.totalFileSize || 0} MB`} />
       </div>
 
       {/* User Table */}
