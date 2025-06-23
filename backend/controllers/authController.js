@@ -32,7 +32,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(`Login attempt from: ${email}`); // Minimal, non-sensitive
+  // console.log(`Login attempt from: ${email}`); // Minimal, non-sensitive
 
   try {
     const user = await User.findOne({ email });

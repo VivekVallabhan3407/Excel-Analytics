@@ -38,7 +38,7 @@ function AdminPanel() {
         activeUsers,
         totalFiles,
         totalCharts,
-        totalFileSize: (totalFileSize / (1024 * 1024)).toFixed(2),
+        totalFileSize,
       });
     } catch (err) {
       console.error('Failed to fetch admin data:', err);
@@ -101,7 +101,8 @@ function AdminPanel() {
         <StatCard label="Active Users" value={stats.activeUsers} />
         <StatCard label="Files Uploaded" value={stats.totalFiles} />
         <StatCard label="Charts Created" value={stats.totalCharts} />
-        <StatCard label="Total File Size" value={`${stats.totalFileSize || 0} MB`} />
+        <StatCard label="Total File Size" value={stats.totalFileSize >= 1024 * 1024 ? `${(stats.totalFileSize / (1024 * 1024)).toFixed(2)} MB` : stats.totalFileSize >= 1024 ? `${(stats.totalFileSize / 1024).toFixed(1)} KB` : `${stats.totalFileSize} Bytes`}/>
+
       </div>
 
       {/* User Table */}
