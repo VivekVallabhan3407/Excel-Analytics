@@ -90,3 +90,22 @@ exports.getColumnsByFileName = async (req, res) => {
     res.status(500).json({ message: 'Failed to retrieve columns' });
   }
 };
+
+// In uploadController.js
+exports.getFileMeta = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const files = await ExcelRecord.find({ userId });
+
+    const total = files.length;
+    const recent = files.map(file => ({
+      fileName: file.fileName,
+      size: Buffer.byteLength(JSON.stringify(file.content)),
+    }));
+
+    res.json({ total, recent });
+  } catch (err) {
+    console.error('Failed to get file metadata:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
