@@ -30,7 +30,7 @@ const AnalyzeData = () => {
   useEffect(() => {
     const fetchColumns = async () => {
       try {
-        const res = await axios.get(/columns/${fileName});
+        const res = await axios.get(`/columns/${fileName}`);
         setAvailableColumns(res.data.columns || []);
       } catch (error) {
         console.error('Error fetching columns:', error);
