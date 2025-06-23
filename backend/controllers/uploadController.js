@@ -23,6 +23,7 @@ exports.uploadFile = async (req, res) => {
       userId: req.user._id,
       fileName: req.file.originalname,
       content: jsonData,
+      size: req.file.size, // Store the size of the file
     });
 
     await newRecord.save();

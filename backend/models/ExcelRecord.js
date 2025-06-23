@@ -14,6 +14,10 @@ const excelRecordSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  size:{
+    type: Number,
+    required: true,
+  },
   uploadedAt: {
     type: Date,
     default: Date.now,
