@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from '../services/axios';
 import jsPDF from 'jspdf';
-import Plotly from 'plotly.js-dist-min'; // For exporting
+import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import { useLocation } from 'react-router-dom';
 
@@ -26,14 +26,12 @@ export default function AnalyzeData() {
 
   const chartRef = useRef();
 
-  // Fetch all files
   useEffect(() => {
     axios.get('/files')
       .then(res => setAvailableFiles(res.data || []))
       .catch(err => console.error('Error fetching files:', err));
   }, []);
 
-  // Fetch columns and data when file changes
   useEffect(() => {
     if (!fileName) return;
 
@@ -46,7 +44,6 @@ export default function AnalyzeData() {
       .catch(() => setTableData([]));
   }, [fileName]);
 
-  // Generate chart
   const handleGenerate = () => {
     if (!fileName || !xAxis || !yAxis || (chartDim === '3d' && !zAxis)) {
       return alert('Please fill all required fields.');
@@ -54,7 +51,7 @@ export default function AnalyzeData() {
 
     const x = tableData.map(row => row[xAxis]);
     const y = tableData.map(row => row[yAxis]);
-    const z = zAxis ? tableData.map(row => row[zAxis]) : null;
+    const z = chartDim === '3d' ? tableData.map(row => row[zAxis]) : null;
 
     let data = [];
     let layout = {};
@@ -77,18 +74,15 @@ export default function AnalyzeData() {
       }
 
       layout = {
-        title: `${chartType2D.toUpperCase()} Chart`,
+        title:`${chartType2D.toUpperCase()} Chart`,
         height: 500,
         width: 700
       };
-
     } else {
       data = [{
         type: 'scatter3d',
         mode: chartType3D === 'lines' ? 'lines+markers' : 'markers',
-        x,
-        y,
-        z,
+        x, y, z,
         marker: { size: 4, color }
       }];
 
@@ -97,7 +91,7 @@ export default function AnalyzeData() {
         scene: {
           xaxis: { title: xAxis },
           yaxis: { title: yAxis },
-          zaxis: { title: zAxis },
+          zaxis: { title: zAxis }
         },
         height: 600,
         width: 700
@@ -118,9 +112,9 @@ export default function AnalyzeData() {
     setChartConfig(null);
   };
 
-  // Save chart to backend
   const handleSave = async () => {
     if (!chartConfig) return alert('Generate chart first');
+
     const token = localStorage.getItem('token');
 
     try {
@@ -128,13 +122,13 @@ export default function AnalyzeData() {
         fileName,
         xAxis,
         yAxis,
-        zAxis,
+        zAxis: chartDim === '3d' ? zAxis : '',
         chartType: chartDim === '2d' ? chartType2D : chartType3D,
         color,
         chartTitle: `${chartDim.toUpperCase()} - ${chartDim === '2d' ? chartType2D : chartType3D}`,
         chartData: chartConfig
       }, {
-        headers: { Authorization: `Bearer ${token} `}
+        headers: { Authorization: `Bearer ${token}` }
       });
 
       alert('Chart saved successfully!');
@@ -144,7 +138,6 @@ export default function AnalyzeData() {
     }
   };
 
-  // Export chart as PNG or PDF
   const handleExport = (format) => {
     if (!chartRef.current) return;
 
@@ -215,26 +208,24 @@ export default function AnalyzeData() {
             <label><input type="radio" value="3d" checked={chartDim === '3d'} onChange={() => setChartDim('3d')} /> 3D</label>
           </div>
 
-          {chartDim === '2d' ? (
-            <div>
-              <label>Chart Type</label>
-              <select value={chartType2D} onChange={e => setChartType2D(e.target.value)} className="w-full border p-2 rounded">
-                <option value="">Select</option>
-                <option value="bar">Bar</option>
-                <option value="line">Line</option>
-                <option value="pie">Pie</option>
-              </select>
-            </div>
-          ) : (
-            <div>
-              <label>Chart Type</label>
-              <select value={chartType3D} onChange={e => setChartType3D(e.target.value)} className="w-full border p-2 rounded">
-                <option value="">Select</option>
-                <option value="scatter3d">3D Scatter</option>
-                <option value="lines">3D Lines</option>
-              </select>
-            </div>
-          )}
+          <div>
+            <label>Chart Type</label>
+            <select value={chartDim === '2d' ? chartType2D : chartType3D} onChange={e => chartDim === '2d' ? setChartType2D(e.target.value) : setChartType3D(e.target.value)} className="w-full border p-2 rounded">
+              <option value="">Select</option>
+              {chartDim === '2d' ? (
+                <>
+                  <option value="bar">Bar</option>
+                  <option value="line">Line</option>
+                  <option value="pie">Pie</option>
+                </>
+              ) : (
+                <>
+                  <option value="scatter3d">3D Scatter</option>
+                  <option value="lines">3D Lines</option>
+                </>
+              )}
+            </select>
+          </div>
 
           <div>
             <label>Color</label>
@@ -247,7 +238,7 @@ export default function AnalyzeData() {
           </div>
         </div>
 
-        {/* Chart display box */}
+        {/* Chart View */}
         <div className="bg-white p-6 rounded shadow flex flex-col items-center justify-center">
           {!chartConfig ? (
             <p className="text-gray-400">Chart will appear here</p>

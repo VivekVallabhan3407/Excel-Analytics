@@ -7,9 +7,14 @@ exports.saveChart = async (req, res) => {
       fileName: req.body.fileName,
       xAxis: req.body.xAxis,
       yAxis: req.body.yAxis,
+      zAxis: req.body.zAxis || null, 
       chartType: req.body.chartType,
-      chartConfig: req.body.config,
+      chartTitle: req.body.chartTitle,
+      color: req.body.color,
+      chartData: req.body.chartData,
     });
+    console.log("User from token:", req.user);
+    console.log("Chart request body:", req.body);
     await newChart.save();
     res.status(201).json({ message: "Chart saved successfully" });
   } catch (err) {

@@ -29,4 +29,13 @@ router.get("/user-charts", auth, async (req, res) => {
   }
 });
 
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    await SavedChart.findByIdAndDelete(req.params.id);
+    res.json({ message: "Chart deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete chart" });
+  }
+});
+
 module.exports = router;

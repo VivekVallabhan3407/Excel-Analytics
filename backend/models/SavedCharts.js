@@ -8,6 +8,7 @@ const savedChartsSchema = new mongoose.Schema({
   fileName: String,
   xAxis: String,
   yAxis: String,
+  zAxis: String,
   chartType: String,
   color: String,
   chartTitle: String,
