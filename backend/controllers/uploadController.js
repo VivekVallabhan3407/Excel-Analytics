@@ -118,3 +118,20 @@ exports.getFileMeta = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+exports.getRecordByFileName = async (req, res) => {
+  try {
+    const record = await ExcelRecord.findOne({
+      userId: req.user._id,
+      fileName: req.params.fileName,
+    });
+
+    if (!record) {
+      return res.status(404).json({ message: "File not found" });
+    }
+
+    res.status(200).json({ data: record.content });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error fetching file data" });
+  }
+};

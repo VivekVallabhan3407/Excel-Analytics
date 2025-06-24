@@ -21,4 +21,5 @@ router.get('/columns/:fileName', auth, uploadController.getColumnsByFileName);
 router.post("/upload", auth, upload.single("file"), uploadController.uploadFile);
 router.get("/records/:id", auth, uploadController.getRecordById);
 router.get("/meta", auth, uploadController.getFileMeta);
+router.get("/record-by-name/:fileName", auth, uploadController.getRecordByFileName);
 module.exports = router;
