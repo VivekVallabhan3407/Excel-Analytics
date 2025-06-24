@@ -74,9 +74,9 @@ export default function AnalyzeData() {
       }
 
       layout = {
-        title:`${chartType2D.toUpperCase()} Chart`,
-        height: 500,
-        width: 700
+        title: `${chartType2D.toUpperCase()} Chart`,
+        autosize: true,
+        margin: { t: 40, l: 40, r: 30, b: 40 },
       };
     } else {
       data = [{
@@ -93,8 +93,9 @@ export default function AnalyzeData() {
           yaxis: { title: yAxis },
           zaxis: { title: zAxis }
         },
-        height: 600,
-        width: 700
+        height: 450,
+        width: 600,
+        margin: { t: 30, l: 30, r: 30, b: 30 }
       };
     }
 
@@ -139,27 +140,48 @@ export default function AnalyzeData() {
   };
 
   const handleExport = (format) => {
-    if (!chartRef.current) return;
+    const validFormats = ['png', 'jpeg', 'webp', 'svg'];
+    const chartElement = chartRef.current?.el;
 
-    Plotly.toImage(chartRef.current, {
-      format,
-      width: 700,
-      height: chartDim === '3d' ? 600 : 500
-    }).then(imgData => {
-      if (format === 'pdf') {
+    if (!chartElement) return alert('Chart not found');
+
+    // For image export (png, jpeg, etc.)
+    if (validFormats.includes(format)) {
+      Plotly.toImage(chartElement, {
+        format,
+        width: 700,
+        height: chartDim === '3d' ? 500 : 400
+      }).then(imgData => {
+        const a = document.createElement('a');
+        a.href = imgData;
+        a.download = `chart.${format}`;
+        a.click();
+      }).catch(err => {
+        console.error('Export failed:', err);
+        alert('Export failed');
+      });
+    }
+
+    // For PDF export
+    else if (format === 'pdf') {
+      Plotly.toImage(chartElement, {
+        format: 'png', // generate PNG first, convert to PDF
+        width: 700,
+        height: chartDim === '3d' ? 500 : 400
+      }).then(imgData => {
         const pdf = new jsPDF({ orientation: 'landscape' });
         pdf.addImage(imgData, 'PNG', 10, 10, 280, 150);
         pdf.save('chart.pdf');
-      } else {
-        const a = document.createElement('a');
-        a.href = imgData;
-        a.download = 'chart.png';
-        a.click();
-      }
-    }).catch(err => {
-      console.error('Export failed:', err);
-      alert('Export failed');
-    });
+      }).catch(err => {
+        console.error('PDF Export failed:', err);
+        alert('PDF Export failed');
+      });
+    }
+
+    // Invalid format
+    else {
+      alert('Invalid export format');
+    }
   };
 
   return (
@@ -232,24 +254,28 @@ export default function AnalyzeData() {
             <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-full" />
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-80">
             <button onClick={handleGenerate} className="bg-blue-600 text-white px-4 py-2 rounded">Generate</button>
-            <button onClick={handleClear} className="bg-gray-500 text-white px-4 py-2 rounded">Clear</button>
+            <button onClick={handleClear} className="bg-red-500 text-white px-4 py-2 rounded">Clear</button>
           </div>
         </div>
 
         {/* Chart View */}
-        <div className="bg-white p-6 rounded shadow flex flex-col items-center justify-center">
+        <div id="chartContainer" className="bg-white p-6 rounded shadow flex flex-col items-center justify-center w-full h-[500px] overflow-hidden">
           {!chartConfig ? (
             <p className="text-gray-400">Chart will appear here</p>
           ) : (
             <>
-              <Plot
-                ref={chartRef}
-                data={chartConfig.data}
-                layout={chartConfig.layout}
-                config={{ responsive: true }}
-              />
+              <div id="chartContainer" className="w-full h-full">
+                <Plot
+                  ref={chartRef}
+                  data={chartConfig.data}
+                  layout={chartConfig.layout}
+                  config={{ responsive: true }}
+                  useResizeHandler
+                  style={{ width: '100%', height: '100%' }}
+                />
+              </div>
               <div className="flex gap-3 mt-4">
                 <button onClick={handleSave} className="bg-green-600 text-white px-4 py-2 rounded">Save</button>
                 <button onClick={() => handleExport('png')} className="bg-purple-600 text-white px-4 py-2 rounded">Export PNG</button>

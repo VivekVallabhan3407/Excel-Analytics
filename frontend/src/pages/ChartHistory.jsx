@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import axios from '../services/axios';
 import { FaEye, FaTrash, FaTimes, FaDownload } from 'react-icons/fa';
 import Plot from 'react-plotly.js';
-
+import jsPDF from 'jspdf';
 const ChartHistory = () => {
   const [charts, setCharts] = useState([]);
   const [selectedChart, setSelectedChart] = useState(null);
-
+  const chartRef = useRef();
   const fetchCharts = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -33,14 +33,24 @@ const ChartHistory = () => {
     }
   };
 
-  const handleDownload = () => {
-    const canvas = document.querySelector('#previewModal canvas');
-    if (!canvas) return alert('No chart to export');
-    const link = document.createElement('a');
-    link.download = `${selectedChart.chartTitle || 'chart'}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  };
+ const handleDownload = () => {
+  if (!chartRef.current || !chartRef.current.el) {
+    return alert('Chart not rendered yet');
+  }
+
+  Plotly.toImage(chartRef.current.el, {
+    format: 'png',
+    width: 700,
+    height: 500,
+  }).then((imgData) => {
+    const pdf = new jsPDF({ orientation: 'landscape' });
+    pdf.addImage(imgData, 'PNG', 10, 10, 280, 150);
+    pdf.save(`${selectedChart.chartTitle || 'chart'}.pdf`);
+  }).catch((err) => {
+    console.error('Export failed:', err);
+    alert('Export failed');
+  });
+};
 
   useEffect(() => {
     fetchCharts();
@@ -50,7 +60,7 @@ const ChartHistory = () => {
     <div className="max-w-7xl mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-6">Chart History</h2>
 
-      <div className="flex gap-6 overflow-x-auto pb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {charts.map(chart => (
           <div key={chart._id} className="min-w-[280px] bg-white border rounded-lg shadow-md p-5">
             <h3 className="text-lg font-semibold mb-2 truncate">{chart.fileName}</h3>
@@ -74,11 +84,10 @@ const ChartHistory = () => {
             <button onClick={() => setSelectedChart(null)} className="absolute top-3 right-3 text-lg text-gray-600 hover:text-red-600"><FaTimes /></button>
             <h3 className="text-xl font-bold mb-4 text-center">{selectedChart.chartTitle}</h3>
             <div className="bg-gray-100 rounded p-4 max-h-[70vh] overflow-auto">
-              <Plot data={selectedChart.chartData.data} layout={selectedChart.chartData.layout} />
+              <Plot id="chartPreview" ref={chartRef} data={selectedChart.chartData.data} layout={selectedChart.chartData.layout} />
             </div>
             <div className="mt-6 flex justify-center gap-4">
-              <button onClick={handleDownload} className="bg-green-600 text-white px-4 py-2 rounded flex items-center gap-2"><FaDownload /> Download PNG</button>
-              <button onClick={() => setSelectedChart(null)} className="bg-red-500 text-white px-4 py-2 rounded flex items-center gap-2"><FaTimes /> Close</button>
+              <button onClick={handleDownload} className="bg-green-600 text-white px-4 py-2 rounded flex items-center gap-2"><FaDownload /> Download PDF</button>
             </div>
           </div>
         </div>
