@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import axios from '../services/axios';
+import { toast } from 'react-toastify';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ function Signup() {
     const phoneRegex = /^[6-9]\d{9}$/;
 
     if (!phoneRegex.test(formData.phone)) {
-      alert("Enter a valid 10-digit Indian phone number");
+      toast.error("Enter a valid 10-digit Indian phone number");
       return;
     }
 
@@ -37,22 +38,22 @@ function Signup() {
         const res = await axios.post('/verify-pin', { pin: adminPin });
         if (!res.data.valid) {
           setPinValid(false);
-          alert('Invalid Admin PIN');
+          toast.error('Invalid Admin PIN');
           return;
         }
       } catch (err) {
         setPinValid(false);
-        alert('PIN verification failed');
+        toast.error('PIN verification failed');
         return;
       }
     }
 
     try {
       await axios.post('/register', formData);
-      alert('Registered successfully');
+      toast.success('Registered successfully');
       navigate('/login');
     } catch (err) {
-      alert('Signup failed');
+      toast.error('Signup failed');
     }
   };
 

@@ -2,6 +2,8 @@ const express = require('express');
 const auth = require('../middleware/auth');
 const router = express.Router();
 const User = require('../models/User');
+const { updateUserRole,deleteUser } = require('../controllers/userController');
+const requireAdmin = require('../middleware/requireAdmin');
 
 router.get('/profile', auth, async (req, res) => {
  

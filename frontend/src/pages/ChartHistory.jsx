@@ -3,6 +3,8 @@ import axios from '../services/axios';
 import { FaEye, FaTrash, FaTimes, FaDownload } from 'react-icons/fa';
 import Plot from 'react-plotly.js';
 import jsPDF from 'jspdf';
+import Plotly from 'plotly.js-dist-min';
+
 const ChartHistory = () => {
   const [charts, setCharts] = useState([]);
   const [selectedChart, setSelectedChart] = useState(null);
@@ -24,7 +26,7 @@ const ChartHistory = () => {
   const deleteChart = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/api/charts/${id}`, {
+      await axios.delete(`/charts/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCharts();

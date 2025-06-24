@@ -59,7 +59,7 @@ function AdminPanel() {
     if (!selectedUser) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`/users/${selectedUser._id}/role`, { role: newRole }, {
+      await axios.put(`/admin/users/${selectedUser._id}/role`, { role: newRole }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert(`Role updated to ${newRole}`);
@@ -79,7 +79,7 @@ function AdminPanel() {
     if (!selectedUser) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`/users/${selectedUser._id}`, {
+      await axios.delete(`/admin/users/${selectedUser._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('User deleted successfully');
@@ -101,7 +101,7 @@ function AdminPanel() {
         <StatCard label="Active Users" value={stats.activeUsers} />
         <StatCard label="Files Uploaded" value={stats.totalFiles} />
         <StatCard label="Charts Created" value={stats.totalCharts} />
-        <StatCard label="Total File Size" value={stats.totalFileSize >= 1024 * 1024 ? `${(stats.totalFileSize / (1024 * 1024)).toFixed(2)} MB` : stats.totalFileSize >= 1024 ? `${(stats.totalFileSize / 1024).toFixed(1)} KB` : `${stats.totalFileSize} Bytes`}/>
+        <StatCard label="Total File Size" value={stats.totalFileSize >= 1024 * 1024 ? `${(stats.totalFileSize / (1024 * 1024)).toFixed(2)} MB` : stats.totalFileSize >= 1024 ? `${(stats.totalFileSize / 1024).toFixed(1)} KB` : `${stats.totalFileSize} Bytes`} />
 
       </div>
 
@@ -131,13 +131,13 @@ function AdminPanel() {
                 <td className="space-x-2">
                   <button
                     onClick={() => openRoleModal(user)}
-                    className="text-blue-600 underline"
+                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                   >
-                    Update Role
+                    Update
                   </button>
                   <button
                     onClick={() => openDeleteModal(user)}
-                    className="text-red-600 underline"
+                    className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                   >
                     Delete
                   </button>

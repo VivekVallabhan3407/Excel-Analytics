@@ -2,7 +2,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -17,7 +18,7 @@ import UploadFile from './pages/UploadFile';
 import AnalyzeData from './pages/AnalyzeData';
 import ChartHistory from './pages/ChartHistory';
 import Profile from './pages/Profile';
- import AdminPanel from './pages/AdminPanel';
+import AdminPanel from './pages/AdminPanel';
 import AIInsights from './pages/AIInsights'; // keep empty for now
 import { AuthProvider } from './contexts/authContext';
 
@@ -29,10 +30,12 @@ import DashBoardLayout from './components/layout/DashBoardLayout';
 
 function App() {
   return (
+
     <ThemeProvider>
       <LanguageProvider>
         <AuthProvider>
           <Router>
+            <ToastContainer position="top-right" autoClose={3000} />
             <Routes>
               {/* Public routes */}
               <Route
@@ -117,25 +120,25 @@ function App() {
                 }
               />
               <Route
-          path="/analyze"
-          element={
-            <ProtectedRoute>
-              <DashBoardLayout>
-                <AnalyzeData />
-              </DashBoardLayout>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/history"
-          element={
-            <ProtectedRoute>
-              <DashBoardLayout>
-                <ChartHistory />
-              </DashBoardLayout>
-            </ProtectedRoute>
-          }
-        />
+                path="/analyze"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <AnalyzeData />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/history"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <ChartHistory />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/settings"
                 element={
@@ -147,26 +150,26 @@ function App() {
                 }
               />
               <Route
-          path="/admin"
-          element={
-            <ProtectedRoute adminOnly={true}>
-              <DashBoardLayout>
-                <AdminPanel />
-              </DashBoardLayout>
-            </ProtectedRoute>
-          } 
-        /> 
-         
+                path="/admin"
+                element={
+                  <ProtectedRoute adminOnly={true}>
+                    <DashBoardLayout>
+                      <AdminPanel />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
+
               <Route
-          path="/insights"
-          element={
-            <ProtectedRoute>
-              <DashBoardLayout>
-                <AIInsights />
-              </DashBoardLayout>
-            </ProtectedRoute>
-          }
-        />
+                path="/insights"
+                element={
+                  <ProtectedRoute>
+                    <DashBoardLayout>
+                      <AIInsights />
+                    </DashBoardLayout>
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/terms"
                 element={

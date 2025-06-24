@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import Plotly from 'plotly.js-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Plot = createPlotlyComponent(Plotly);
 
@@ -46,7 +47,8 @@ export default function AnalyzeData() {
 
   const handleGenerate = () => {
     if (!fileName || !xAxis || !yAxis || (chartDim === '3d' && !zAxis)) {
-      return alert('Please fill all required fields.');
+      toast.error('Please fill all required fields.');
+      return;
     }
 
     const x = tableData.map(row => row[xAxis]);
@@ -114,7 +116,10 @@ export default function AnalyzeData() {
   };
 
   const handleSave = async () => {
-    if (!chartConfig) return alert('Generate chart first');
+    if (!chartConfig) {
+      toast.error('Generate chart first');
+      return;
+    }
 
     const token = localStorage.getItem('token');
 
@@ -132,10 +137,10 @@ export default function AnalyzeData() {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      alert('Chart saved successfully!');
+      toast.success('Chart saved successfully!');
     } catch (err) {
       console.error(err);
-      alert('Error saving chart');
+      toast.error('Error saving chart');
     }
   };
 
@@ -143,8 +148,10 @@ export default function AnalyzeData() {
     const validFormats = ['png', 'jpeg', 'webp', 'svg'];
     const chartElement = chartRef.current?.el;
 
-    if (!chartElement) return alert('Chart not found');
-
+    if (!chartElement) {
+      toast.error('Chart not found');
+      return;
+    }
     // For image export (png, jpeg, etc.)
     if (validFormats.includes(format)) {
       Plotly.toImage(chartElement, {
@@ -158,7 +165,7 @@ export default function AnalyzeData() {
         a.click();
       }).catch(err => {
         console.error('Export failed:', err);
-        alert('Export failed');
+        toast.error('Export failed');
       });
     }
 
@@ -174,13 +181,13 @@ export default function AnalyzeData() {
         pdf.save('chart.pdf');
       }).catch(err => {
         console.error('PDF Export failed:', err);
-        alert('PDF Export failed');
+        toast.error('PDF Export failed');
       });
     }
 
     // Invalid format
     else {
-      alert('Invalid export format');
+      toast.error('Invalid export format');
     }
   };
 

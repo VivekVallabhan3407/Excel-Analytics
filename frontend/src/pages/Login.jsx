@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../services/axios';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -20,12 +20,10 @@ function Login() {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       
-      alert('Login successful');
+      toast.success('Login successful');
       navigate('/dashboard');
-
-
     } catch {
-      alert('Login failed');
+      toast.error('Login failed');
     }
   };
 

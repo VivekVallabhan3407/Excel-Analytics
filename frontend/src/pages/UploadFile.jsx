@@ -3,11 +3,14 @@ import axios from '../services/axios';
 import * as XLSX from 'xlsx';
 import { CloudArrowUpIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 function UploadFile() {
   const [file, setFile] = useState(null);
   const [previewData, setPreviewData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+
   const handleFileChange = (e) => {
     const selected = e.target.files[0];
     if (!selected) return;
@@ -30,17 +33,23 @@ function UploadFile() {
   };
 
   const handleUploadClick = () => {
-    if (!file) return alert("Select a file first.");
+    if (!file) {
+      toast.error("Select a file first.");
+      return;
+    }
     setShowModal(true);
   };
 
   const confirmUpload = async () => {
-     const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token'); 
 
-      if (!file) return alert("Select a file first.");
+    if (!file) {
+      toast.error("Select a file first.");
+      return;
+    }
 
-      const formData = new FormData();
-      formData.append('file', file);
+    const formData = new FormData();
+    formData.append('file', file);
 
     try {
       await axios.post('/upload', formData, {
@@ -48,15 +57,15 @@ function UploadFile() {
                   Authorization: `Bearer ${token}`
         },
       });
-      alert('Uploaded successfully');
+      toast.success('Uploaded successfully');
       setFile(null);
       setPreviewData([]);
       setShowModal(false);
+      navigate('/analyze', { state: { fileName: file.name } });
     } catch (err) {
-      alert('Upload failed');
+      toast.error('Upload failed');
       console.error(err);
     }
-    navigate('/analyze',{state:{filName: file.name}}); 
   };
 
   return (
@@ -89,7 +98,6 @@ function UploadFile() {
         onChange={handleFileChange}
       />
 
-
       {/* Upload Button */}
       <div className="mt-6 text-center">
         <button
@@ -100,7 +108,6 @@ function UploadFile() {
           Upload
         </button>
       </div>
-
 
       {/* File Preview */}
       {previewData.length > 0 && (
