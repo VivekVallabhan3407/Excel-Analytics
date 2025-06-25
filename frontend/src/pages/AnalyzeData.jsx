@@ -191,7 +191,7 @@ export default function AnalyzeData() {
   };
 
   return (
-    <div className="p-6 max-w-6xl mx-auto bg-gradient-to-br from-green-50 to-green-100">
+    <div className="p-6 max-w-6xl mx-auto ">
       <h2 className="text-3xl font-bold text-center mb-8">Analyze Your Data</h2>
 
       <div className="grid md:grid-cols-2 gap-6">

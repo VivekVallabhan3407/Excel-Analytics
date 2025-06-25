@@ -69,7 +69,7 @@ function UploadFile() {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-green-100">
+    <div className="p-6 max-w-3xl mx-auto ">
       <h2 className="text-3xl font-bold mb-6 text-center text-green-600">
         Upload Your Files
       </h2>

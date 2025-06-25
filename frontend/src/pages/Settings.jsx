@@ -7,7 +7,7 @@ const Settings = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-gradient-to-br from-green-50 to-green-100">
+    <div className="max-w-xl mx-auto p-6 ">
       <h2 className="text-2xl font-bold mb-6">Settings</h2>
 
       {/* Theme Setting */}
