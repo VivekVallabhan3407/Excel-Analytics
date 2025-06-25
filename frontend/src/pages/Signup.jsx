@@ -58,7 +58,7 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100">
       <form 
         onSubmit={handleSubmit} 
         className="flex flex-col gap-4 p-8 bg-white rounded-xl shadow-md w-full max-w-md"
