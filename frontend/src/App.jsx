@@ -19,7 +19,7 @@ import AnalyzeData from './pages/AnalyzeData';
 import ChartHistory from './pages/ChartHistory';
 import Profile from './pages/Profile';
 import AdminPanel from './pages/AdminPanel';
-import AIInsights from './pages/AIInsights'; // keep empty for now
+// import AIInsights from './pages/AIInsights'; // keep empty for now
 import { AuthProvider } from './contexts/authContext';
 
 
@@ -160,7 +160,7 @@ function App() {
                 }
               />
 
-              <Route
+              {/* <Route
                 path="/insights"
                 element={
                   <ProtectedRoute>
@@ -169,7 +169,7 @@ function App() {
                     </DashBoardLayout>
                   </ProtectedRoute>
                 }
-              />
+              /> */}
               <Route
                 path="/terms"
                 element={

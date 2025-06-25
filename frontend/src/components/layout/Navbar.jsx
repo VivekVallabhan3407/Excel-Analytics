@@ -12,7 +12,6 @@ export default function Navbar() {
       <Container>
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center space-x-3">
-            {/* Updated logo section */}
             <img 
               src={logo} 
               alt="Data Crunchers" 
@@ -24,7 +23,6 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Menu - Updated colors to match brand */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-gray-700 hover:text-[#217346]">Home</Link>
             <Link to="/about" className="text-gray-700 hover:text-[#217346]">About</Link>
@@ -34,7 +32,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button 
             className="md:hidden text-[#217346]" 
             onClick={() => setIsOpen(!isOpen)}
@@ -43,7 +40,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu - Updated styling */}
         {isOpen && (
           <div className="md:hidden py-4 space-y-4 bg-white border-t">
             <Link to="/" className="block px-4 text-gray-700 hover:text-[#217346]">Home</Link>

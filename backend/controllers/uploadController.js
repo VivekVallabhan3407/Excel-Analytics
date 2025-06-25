@@ -22,13 +22,12 @@ exports.uploadFile = async (req, res) => {
       userId: req.user._id,
       fileName: req.file.originalname,
       content: jsonData,
-      size: req.file.size, // optional: not used elsewhere
+      size: req.file.size, 
     });
 
     await newRecord.save();
     fs.unlinkSync(filePath); // remove file from disk after processing
 
-    // ✅ UPDATE user document with file count and size
     await User.findByIdAndUpdate(req.user._id, {
       $inc: {
         files: 1,

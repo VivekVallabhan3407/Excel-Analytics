@@ -94,9 +94,7 @@ function AdminPanel() {
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Admin Panel</h1>
 
-      {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-        {/* Cards same as before */}
         <StatCard label="Total Users" value={stats.totalUsers} />
         <StatCard label="Active Users" value={stats.activeUsers} />
         <StatCard label="Files Uploaded" value={stats.totalFiles} />
@@ -148,7 +146,6 @@ function AdminPanel() {
         </table>
       </div>
 
-      {/* Modal: Update Role */}
       {showRoleModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-[90%] max-w-sm text-center">
@@ -179,7 +176,6 @@ function AdminPanel() {
         </div>
       )}
 
-      {/* Modal: Delete Confirmation */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-[90%] max-w-sm text-center">
@@ -207,7 +203,6 @@ function AdminPanel() {
   );
 }
 
-// Reusable card
 const StatCard = ({ label, value }) => (
   <div className="bg-white p-4 shadow rounded text-center">
     <h2 className="text-lg font-semibold">{label}</h2>

@@ -14,7 +14,6 @@ function Login() {
       const res = await axios.post('/login', { email, password });
 
       const token = res.data.token;
-      // Decode token (without verifying, just extracting payload)
       const payload = JSON.parse(atob(token.split('.')[1]));
 
       localStorage.setItem('token', token);

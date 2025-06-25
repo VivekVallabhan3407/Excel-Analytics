@@ -9,7 +9,6 @@ function Dashboard() {
   const [lastLogin, setLastLogin] = useState("");
   const [recentCharts, setRecentCharts] = useState([]);
 
-  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const chartsPerPage = 5;
 
@@ -23,7 +22,6 @@ function Dashboard() {
         const token = localStorage.getItem("token");
         const headers = { Authorization: `Bearer ${token}` };
 
-        // File data
         const fileRes = await axios.get("/files/meta", { headers });
         setUploadedCount(fileRes.data.total || 0);
         const sizeBytes = fileRes.data.recent.reduce(
@@ -32,7 +30,6 @@ function Dashboard() {
         );
         setTotalSize((sizeBytes / (1024 * 1024)).toFixed(2)); // In MB
 
-        // Chart data
         const chartRes = await axios.get("/charts/user-charts", { headers });
         setChartCount(chartRes.data.length);
 
@@ -54,7 +51,6 @@ function Dashboard() {
     fetchData();
   }, []);
 
-  // Pagination logic
   const indexOfLastChart = currentPage * chartsPerPage;
   const indexOfFirstChart = indexOfLastChart - chartsPerPage;
   const currentCharts = recentCharts.slice(indexOfFirstChart, indexOfLastChart);
@@ -76,7 +72,6 @@ function Dashboard() {
 
     await axios.delete(`/charts/${ chartId }`, { headers });
 
-    // Remove chart from UI
     const updatedCharts = recentCharts.filter((chart) => chart.id !== chartId);
     setRecentCharts(updatedCharts);
     setChartCount(updatedCharts.length);
@@ -91,7 +86,6 @@ return (
       Welcome, {username}!
     </h1>
 
-    {/* Metrics cards */}
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
       <div className="bg-white shadow rounded p-4">
         <h2 className="text-xl font-semibold text-green-600">
@@ -119,7 +113,6 @@ return (
       </div>
     </div>
 
-    {/* Recent Charts Table */}
     <div className="bg-white shadow rounded p-4 overflow-x-auto">
       <h2 className="text-xl font-semibold text-green-600 mb-4">
         Recent Charts
@@ -152,7 +145,6 @@ return (
         </tbody>
       </table>
 
-      {/* Pagination Controls */}
       <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
         <p>
           Showing {indexOfFirstChart + 1} to{" "}

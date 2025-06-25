@@ -27,8 +27,8 @@ const Profile = () => {
           },
         }
       );
-      setUser(res.data);         // update global auth context
-      setEditMode(false);        // exit edit mode
+      setUser(res.data);         
+      setEditMode(false);        
     } catch (err) {
       console.error('Failed to update user:', err);
     }

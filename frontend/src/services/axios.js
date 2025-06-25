@@ -5,7 +5,6 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-// Add response interceptor for error handling
 instance.interceptors.response.use(
   response => response,
   error => {
@@ -18,7 +17,6 @@ instance.interceptors.response.use(
   }
 );
 
-// Add request interceptor to add token
 instance.interceptors.request.use(
   config => {
     const token = localStorage.getItem('token');

@@ -185,7 +185,6 @@ export default function AnalyzeData() {
       });
     }
 
-    // Invalid format
     else {
       toast.error('Invalid export format');
     }
