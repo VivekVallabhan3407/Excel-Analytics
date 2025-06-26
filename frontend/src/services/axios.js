@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: process.env.VITE_APP_URL || "http://localhost:5000/api",
+  baseURL: process.env.VITE_APP_URL || "http://localhost:5000",
   withCredentials: true,
 });
 
