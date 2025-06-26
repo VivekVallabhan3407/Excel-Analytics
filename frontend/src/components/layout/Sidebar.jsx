@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaUpload,
@@ -7,37 +7,33 @@ import {
   FaRobot,
   FaSignOutAlt,
   FaTools,
-} from 'react-icons/fa';
-import logo from '../../assets/logo.png'; 
+} from "react-icons/fa";
+import logo from "../../assets/logo.png";
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
   const role = user?.role;
 
   const links = [
-    { to: '/dashboard', label: 'Dashboard', icon: FaHome },
-    { to: '/upload', label: 'Upload Excel', icon: FaUpload },
-    { to: '/analyze', label: 'Analyze Data', icon: FaChartLine },
-    { to: '/history', label: 'Chart History', icon: FaHistory },
+    { to: "/dashboard", label: "Dashboard", icon: FaHome },
+    { to: "/upload", label: "Upload Excel", icon: FaUpload },
+    { to: "/analyze", label: "Analyze Data", icon: FaChartLine },
+    { to: "/history", label: "Chart History", icon: FaHistory },
     // { to: '/insights', label: 'AI Insights', icon: FaRobot },
-    { to: '/settings', label: 'Settings', icon: FaTools },
+    // { to: '/settings', label: 'Settings', icon: FaTools },
   ];
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
   };
 
   return (
     <div className="w-60 bg-green-700 text-white flex flex-col">
       <div className="flex items-center space-x-2 p-4 text-xl font-bold">
-        <img
-          src={logo}
-          alt="Logo"
-          className="w-6 h-6 bg-white rounded-sm"
-        />
+        <img src={logo} alt="Logo" className="w-6 h-6 bg-white rounded-sm" />
         <span>Data Crunchers</span>
       </div>
 
@@ -47,7 +43,7 @@ export default function Sidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex items-center px-4 py-3 hover:bg-green-600 space-x-3 ${isActive ? 'bg-green-800' : ''}`
+              `flex items-center px-4 py-3 hover:bg-green-600 space-x-3 ${isActive ? "bg-green-800" : ""}`
             }
           >
             <Icon className="text-white text-lg" />
@@ -55,11 +51,11 @@ export default function Sidebar() {
           </NavLink>
         ))}
 
-        {role === 'admin' && (
+        {role === "admin" && (
           <NavLink
             to="/admin"
             className={({ isActive }) =>
-              `flex items-center px-4 py-3 hover:bg-green-600 space-x-3 ${isActive ? 'bg-green-800' : ''}`
+              `flex items-center px-4 py-3 hover:bg-green-600 space-x-3 ${isActive ? "bg-green-800" : ""}`
             }
           >
             <FaTools className="text-white text-lg" />
