@@ -7,21 +7,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const app = express();
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://excel-analytics-frontend-mocx.onrender.com",
-];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "http://localhost:5173", // Frontend URL
     credentials: true,
   }),
 );
