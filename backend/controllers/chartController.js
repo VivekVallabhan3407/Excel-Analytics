@@ -43,3 +43,14 @@ exports.getChartCount = async (req, res) => {
     res.status(500).json({ message: "Error getting chart count" });
   }
 };
+
+exports.getChartTypeStats = async (req, res) => {
+  try {
+    const stats = await Chart.aggregate([
+      { $group: { _id: "$chartType", count: { $sum: 1 } } }
+    ]);
+    res.status(200).json(stats);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching chart type stats" });
+  }
+};

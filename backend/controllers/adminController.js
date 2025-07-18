@@ -56,3 +56,22 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json({ message: 'Error deleting user' });
   }
 };
+exports.getMonthlyUserStats = async (req, res) => {
+  try {
+    const stats = await User.aggregate([
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            month: { $month: "$createdAt" }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { "_id.year": 1, "_id.month": 1 } }
+    ]);
+    res.status(200).json(stats);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching monthly user stats" });
+  }
+};
