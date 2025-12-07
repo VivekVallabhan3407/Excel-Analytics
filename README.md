@@ -21,7 +21,7 @@
 - Database: MongoDB Atlas
 - Others: Mongoose, JWT, CORS, dotenv
 
-## 🧪 Sample Functionalities
+## Sample Functionalities
 - User logs in or registers
 
 - Uploads an Excel file
@@ -34,7 +34,7 @@
 
     - Graphical representation
 
-## 📄 License
+## License
 
 This project is licensed under the [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).  
 No commercial use, modification, or redistribution permitted without explicit permission.
