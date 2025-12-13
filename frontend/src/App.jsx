@@ -8,8 +8,8 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-// import Settings from './pages/Settings';
-// import Terms from "./pages/Terms";
+import Settings from './pages/Settings';
+import Terms from "./pages/Terms";
 import About from "./pages/About";
 
 import Dashboard from "./pages/DashBoard";
@@ -21,14 +21,12 @@ import AdminPanel from "./pages/AdminPanel";
 // import AIInsights from './pages/AIInsights'; // keep empty for now
 import { AuthProvider } from "./contexts/authContext";
 
-import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import DashBoardLayout from "./components/layout/DashBoardLayout";
 
 function App() {
   return (
-    <ThemeProvider>
       <LanguageProvider>
         <AuthProvider>
           <Router>
@@ -136,7 +134,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              {/* <Route
+              <Route
                 path="/settings"
                 element={
                   <ProtectedRoute>
@@ -145,7 +143,7 @@ function App() {
                     </DashBoardLayout>
                   </ProtectedRoute>
                 }
-              /> */}
+              />
               <Route
                 path="/admin"
                 element={
@@ -167,7 +165,7 @@ function App() {
                   </ProtectedRoute>
                 }
               /> */}
-              {/* <Route
+              <Route
                 path="/terms"
                 element={
                   <ProtectedRoute>
@@ -176,7 +174,7 @@ function App() {
                     </DashBoardLayout>
                   </ProtectedRoute>
                 }
-              /> */}
+              />
               <Route
                 path="/profile"
                 element={
@@ -191,7 +189,6 @@ function App() {
           </Router>
         </AuthProvider>
       </LanguageProvider>
-    </ThemeProvider>
   );
 }
 

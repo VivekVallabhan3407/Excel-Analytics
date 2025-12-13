@@ -21,7 +21,7 @@ export default function Sidebar() {
     { to: "/analyze", label: "Analyze Data", icon: FaChartLine },
     { to: "/history", label: "Chart History", icon: FaHistory },
     // { to: '/insights', label: 'AI Insights', icon: FaRobot },
-    // { to: '/settings', label: 'Settings', icon: FaTools },
+    { to: '/settings', label: 'Settings', icon: FaTools },
   ];
 
   const handleLogout = () => {
