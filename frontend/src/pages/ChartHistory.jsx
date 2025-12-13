@@ -52,7 +52,7 @@ const ChartHistory = () => {
       pdf.save(`${selectedChart.chartTitle || 'chart'}.pdf`);
     }).catch((err) => {
       console.error('Export failed:', err);
-      alert('Export failed');
+      toast.error('Export failed');
     });
   };
 
@@ -104,7 +104,10 @@ const ChartHistory = () => {
 
         <button
           onClick={handleExportJSON}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          className={`px-4 py-2 rounded text-white ${charts.length === 0
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700'
+            }`}
         >
           Export JSON
         </button>
