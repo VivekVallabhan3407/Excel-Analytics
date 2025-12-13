@@ -86,7 +86,7 @@ const ChartHistory = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "analytics_summary.json";
+    link.download = `analytics_summary-${new Date().toISOString().split('T')[0]}.json`;
     link.click();
 
     URL.revokeObjectURL(url);
