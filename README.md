@@ -13,6 +13,8 @@ A web-based tool to upload Excel files and perform basic analytics like statisti
 
 - Authentication system (Login/Register)
 
+- Admin Dashboard witt full admin privileges and user analytics visualization.
+
 - Mobile-friendly UI
 
 ## Tech Stack
