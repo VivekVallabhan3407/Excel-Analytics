@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from '../services/axios';
 import { FaEye, FaTrash, FaTimes, FaDownload } from 'react-icons/fa';
 import Plot from 'react-plotly.js';
+import { toast } from 'react-toastify';
 import jsPDF from 'jspdf';
 import Plotly from 'plotly.js-dist-min';
 
@@ -37,7 +38,8 @@ const ChartHistory = () => {
 
   const handleDownload = () => {
     if (!chartRef.current || !chartRef.current.el) {
-      return alert('Chart not rendered yet');
+      toast.error('Chart not rendered yet');
+      return;
     }
 
     Plotly.toImage(chartRef.current.el, {
@@ -56,7 +58,7 @@ const ChartHistory = () => {
 
   const handleExportJSON = () => {
     if (!charts.length) {
-      alert("No chart data to export");
+      toast.error("No chart data to export");
       return;
     }
 
@@ -88,6 +90,7 @@ const ChartHistory = () => {
     link.click();
 
     URL.revokeObjectURL(url);
+    toast.success(`Exported ${charts.length} charts successfully`);
   };
 
   useEffect(() => {
