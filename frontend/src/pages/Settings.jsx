@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LanguageSelect from '../components/LanguageSelect';
 
 const Settings = () => {
   const navigate = useNavigate();

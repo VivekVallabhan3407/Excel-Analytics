@@ -21,13 +21,11 @@ import AdminPanel from "./pages/AdminPanel";
 // import AIInsights from './pages/AIInsights'; // keep empty for now
 import { AuthProvider } from "./contexts/authContext";
 
-import { LanguageProvider } from "./contexts/LanguageContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import DashBoardLayout from "./components/layout/DashBoardLayout";
 
 function App() {
   return (
-      <LanguageProvider>
         <AuthProvider>
           <Router>
             <ToastContainer position="top-right" autoClose={3000} />
@@ -188,7 +186,6 @@ function App() {
             </Routes>
           </Router>
         </AuthProvider>
-      </LanguageProvider>
   );
 }
 
