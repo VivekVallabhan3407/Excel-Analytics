@@ -17,6 +17,8 @@ Excel-Analytics is a full-stack MERN based data vosualization and analytics plat
 
 - Admin Dashboard with full admin privileges and user analytics visualization.
 
+- Toast notifications for each user action for proper feedback.
+
 - Mobile-friendly UI
 
 ## Tech Stack
