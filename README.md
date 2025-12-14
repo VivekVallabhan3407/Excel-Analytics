@@ -1,6 +1,6 @@
 # Excel-Analytics
 
-A web-based tool to upload Excel files and perform basic analytics like statistical summaries and visualizations. Built with the MERN stack. 
+Excel-Analytics is a full-stack MERN based data vosualization and analytics platform. User can upload files in xlsx or csv format and generate charts of either 2d or 3d type and save them to database or export them.  
 
 ## Features
 - Upload .xlsx or .csv files
