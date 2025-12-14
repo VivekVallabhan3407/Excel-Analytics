@@ -105,7 +105,7 @@ const ChartHistory = () => {
         <button
           onClick={handleExportJSON}
           className={`px-4 py-2 rounded text-white ${charts.length === 0
-              ? 'bg-gray-400 cursor-not-allowed'
+              ? 'bg-gray-400 cursor-not-allowed pointer-events-none'
               : 'bg-blue-600 hover:bg-blue-700'
             }`}
         >
