@@ -13,6 +13,8 @@ A web-based tool to upload Excel files and perform basic analytics like statisti
 
 - Authentication system (Login/Register)
 
+- User can generate and export json summary for their charts.
+
 - Admin Dashboard with full admin privileges and user analytics visualization.
 
 - Mobile-friendly UI
