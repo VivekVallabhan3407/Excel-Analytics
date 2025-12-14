@@ -11,6 +11,15 @@ exports.uploadFile = async (req, res) => {
     return res.status(400).json({ message: 'No file uploaded' });
   }
 
+  const MAX_FILE_SIZE = 3 * 1024 * 1024; // 3MB
+
+  if (req.file.size > MAX_FILE_SIZE) {
+    fs.unlinkSync(req.file.path);
+    return res.status(400).json({
+      message: "File too large. Please upload files under 3MB.",
+    });
+  }
+
   try {
     const filePath = path.join(__dirname, "../uploads", req.file.filename);
     const workbook = xlsx.readFile(filePath);
@@ -18,11 +27,20 @@ exports.uploadFile = async (req, res) => {
     const sheet = workbook.Sheets[sheetName];
     const jsonData = xlsx.utils.sheet_to_json(sheet);
 
+    const MAX_ROWS = 1500;
+
+    if (jsonData.length > MAX_ROWS) {
+      fs.unlinkSync(filePath);
+      return res.status(400).json({
+        message: "Dataset too large. Please upload files with under 1000 rows.",
+      });
+    }
+
     const newRecord = new ExcelRecord({
       userId: req.user._id,
       fileName: req.file.originalname,
       content: jsonData,
-      size: req.file.size, 
+      size: req.file.size,
     });
 
     await newRecord.save();
@@ -43,8 +61,8 @@ exports.uploadFile = async (req, res) => {
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Server error while uploading file" });
-  }
+    res.status(500).json({ message: "Server error while uploading file" });
+  }
 };
 
 exports.getRecordById = async (req, res) => {
@@ -80,7 +98,7 @@ exports.getColumnsByFileName = async (req, res) => {
   const { fileName } = req.params;
 
   try {
-    const record = await ExcelRecord.findOne({ 
+    const record = await ExcelRecord.findOne({
       userId: req.user._id,
       fileName
     });
@@ -91,7 +109,7 @@ exports.getColumnsByFileName = async (req, res) => {
 
     const firstRow = record.content[0];
     const columns = Object.keys(firstRow);
-    
+
     res.status(200).json(columns);
   } catch (err) {
     console.error('Error fetching columns:', err);
