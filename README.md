@@ -1,6 +1,6 @@
 # Excel-Analytics
 
-Excel-Analytics is a full-stack MERN based data vosualization and analytics platform. User can upload files in xlsx or csv format and generate charts of either 2d or 3d type and save them to database or export them.  They can see tehir number of files uploaded, total file size, total charts created and other metrics. It also contains the activity table whihc shows chart type, name, date and delete option. Users can see chart history and can view or download them.   
+Excel-Analytics is a full-stack MERN based data vosualization and analytics platform. User can upload files in xlsx or csv format and generate charts of either 2d or 3d type and save them to database or export them.  They can see tehir number of files uploaded, total file size, total charts created and other metrics. It also contains the activity table whihc shows chart type, name, date and delete option. Users can see chart history and can view or download them. There is also a admin dashboard which contains usage analytics of normal users and gives admin power to update role of user or delete thei accounts.
 
 ## Features
 - Upload .xlsx or .csv files
