@@ -69,7 +69,13 @@ excel-analytics/
 │               ├──HeroSection.jsx
 │               └──WhyChooseUs.jsx
 │         ├── layout/
+│               ├──DashBoardLayout.jsx
+│               ├──DashBoardNavbar.jsx
+│               ├──Footer.jsx
+│               ├──Navbar.jsx
+│               └──Sidebar.jsx               
 │         └── ui/
+│               └──Container.jsx
 │   ├── contexts/
 │        └──authContext.js
 │   ├── pages/
