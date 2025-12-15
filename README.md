@@ -62,7 +62,12 @@ excel-analytics/
 │        └──logo.png
 │   ├── components/
 │         ├── auth/
+│               ├──ProtectedRoute.jsx
+│               └──RequireAdmin.jsx
 │         ├── home/
+│               ├──FAQSection.jsx
+│               ├──HeroSection.jsx
+│               └──WhyChooseUs.jsx
 │         ├── layout/
 │         └── ui/
 │   ├── contexts/
