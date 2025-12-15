@@ -56,6 +56,24 @@ excel-analytics/
 │
 ├── frontend/
 │ ├── src/
+    ├── assets/
+│        ├──DATA CRUNCHERS.png
+│        ├──excel-graph.png
+│        └──logo.png
+│   ├── components/
+│        ├──auth.js
+│        └──requireAdmin.js
+│   ├── contexts/
+│        └──authContext.js
+│   ├── pages/
+│        ├──adminRoutes.js
+│        ├──aiRoutes.js
+│        ├──authRoutes.js
+│        ├──chartRoutes.js
+│        ├──uploadRoutes.js
+│        └──uploadRoutes.js
+│   └── services/
+
 │ ├── public/
 │ └── package.json
 │
