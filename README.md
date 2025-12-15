@@ -33,6 +33,11 @@ Excel-Analytics is a full-stack MERN based data vosualization and analytics plat
 excel-analytics/
 ├── backend/    
 │ ├── controllers/
+        ├──adminController.js
+        ├──authController.js
+        ├──chartController.js
+        ├──uploadController.js
+        └──userController.js
 │ ├── middleware/ 
 │ ├── models/
 │ ├── routes/
