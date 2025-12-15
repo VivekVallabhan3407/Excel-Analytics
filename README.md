@@ -27,6 +27,26 @@ Excel-Analytics is a full-stack MERN based data vosualization and analytics plat
 - Database: MongoDB Atlas
 - Others: Mongoose, JWT, CORS, dotenv
 
+## Folder structure
+
+```
+excel-analytics/
+├── backend/    
+│ ├── controllers/
+│ ├── middleware/ 
+│ ├── models/
+│ ├── routes/
+│ └── server.js
+│
+├── frontend/
+│ ├── src/
+│ ├── public/
+│ └── package.json
+│
+└── README.md
+
+```
+
 ## Sample Functionalities
 - User logs in or registers
 
