@@ -56,13 +56,15 @@ excel-analytics/
 │
 ├── frontend/
 │ ├── src/
-    ├── assets/
+│    ├── assets/
 │        ├──DATA CRUNCHERS.png
 │        ├──excel-graph.png
 │        └──logo.png
 │   ├── components/
-│        ├──auth.js
-│        └──requireAdmin.js
+│         ├── auth/
+│         ├── home/
+│         ├── layout/
+│         └── ui/
 │   ├── contexts/
 │        └──authContext.js
 │   ├── pages/
@@ -72,7 +74,11 @@ excel-analytics/
 │        ├──chartRoutes.js
 │        ├──uploadRoutes.js
 │        └──uploadRoutes.js
-│   └── services/
+│   ├──App.jsx
+│   ├──App.css
+│   ├──index.css
+│   ├──main.jsx
+│   └──index.html
 
 │ ├── public/
 │ └── package.json
