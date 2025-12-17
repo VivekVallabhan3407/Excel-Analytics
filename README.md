@@ -170,6 +170,7 @@ The frontend should be running on http://localhost:5173.
 1. Google Drive integration.
 2. AI summarization and analysis of uploaded files
 3. User ranking and leaderboard based on chart generation and dataset usage
+4. Uploaded File Delete option for users.
 
 ## License
 
