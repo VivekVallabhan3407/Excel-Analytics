@@ -165,6 +165,12 @@ npm run dev
 
 The frontend should be running on http://localhost:5173.
 
+## Future Scope:
+
+1. Google Drive integration.
+2. AI summarization and analysis of uploaded files
+3. User ranking and leaderboard based on chart generation and dataset usage
+
 ## License
 
 This project is licensed under the [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).  
