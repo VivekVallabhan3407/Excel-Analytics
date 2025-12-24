@@ -111,11 +111,11 @@ excel-analytics/
 
     - Graphical representation
 
-## 🚀 Getting Started
+##  Getting Started
 
 Follow the steps below to set up and run the **Excel Analytics System** locally.
 
-### 🧩 Prerequisites
+###  Prerequisites
 Make sure you have installed:
 - [Node.js](https://nodejs.org/) (v16 or above)
 - [npm](https://www.npmjs.com/)
@@ -127,7 +127,7 @@ Make sure you have installed:
 git clone https://github.com/VivekVallabhan3407/Excel-Analytics.git
 cd excel-analytics
 ```
-2. ### ⚙️ Setup Backend
+2. ###  Setup Backend
 
 1. Go to the backend folder:
 ```bash
@@ -146,7 +146,7 @@ npm run dev
 ```
 The API should now run on http://localhost:5000.
 
-3. ### 💻 Setup Frontend
+3. ###  Setup Frontend
 
 1. Open a new terminal and navigate to frontend:
 ```bash
