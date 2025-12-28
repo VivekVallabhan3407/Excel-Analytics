@@ -174,6 +174,7 @@ The frontend should be running on http://localhost:5173.
 5. Chart versioning for iterative analytics
 6. Dataset validation and quality indicators
 7. Automatic Data Sampling for large files.
+8. Save created charts to google drive.
 
 ## License
 
