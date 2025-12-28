@@ -171,6 +171,9 @@ The frontend should be running on http://localhost:5173.
 2. AI summarization and analysis of uploaded files
 3. User ranking and leaderboard based on chart generation and dataset usage
 4. Uploaded File Delete option for users.
+5. Chart versioning for iterative analytics
+6. Dataset validation and quality indicators
+7. Automatic Data Sampling for large files.
 
 ## License
 
