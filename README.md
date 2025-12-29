@@ -168,13 +168,12 @@ The frontend should be running on http://localhost:5173.
 ## Future Scope:
 
 1. Google Drive integration.
-2. AI summarization and analysis of uploaded files
-3. User ranking and leaderboard based on chart generation and dataset usage
-4. Uploaded File Delete option for users.
-5. Chart versioning for iterative analytics
-6. Dataset validation and quality indicators
-7. Automatic Data Sampling for large files.
-8. Save created charts to google drive.
+2. User ranking and leaderboard based on chart generation and dataset usage
+3. Uploaded File Delete option for users.
+4. Chart versioning for iterative analytics
+5. Dataset validation and quality indicators
+6. Automatic Data Sampling for large files.
+7. Save created charts to google drive.
 
 ## License
 
